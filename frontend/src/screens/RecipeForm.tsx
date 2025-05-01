@@ -46,19 +46,19 @@ const RecipeForm: React.FC = () => {
     }
   }, [id, recipes, dispatch, user]);
 
-  useEffect(() => {
-    if (id) {
-      // Set up polling for real-time updates
-      const interval = setInterval(() => {
-        dispatch(fetchRecipe(id));
-        setLastSync(new Date());
-      }, 30000);
+  // useEffect(() => {
+  //   if (id) {
+  //     // Set up polling for real-time updates
+  //     const interval = setInterval(() => {
+  //       dispatch(fetchRecipe(id));
+  //       setLastSync(new Date());
+  //     }, 30000);
 
-      return () => {
-        if (interval) clearInterval(interval);
-      };
-    }
-  }, [id, dispatch]);
+  //     return () => {
+  //       if (interval) clearInterval(interval);
+  //     };
+  //   }
+  // }, [id, dispatch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
