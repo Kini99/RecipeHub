@@ -14,25 +14,24 @@ A collaborative recipe platform where users can create, share, and cook together
 - Dynamic ingredient scaling based on servings
 - Step-by-step cooking instructions
 - Built-in cooking timers with notifications
-- Real-time collaboration
+- Real-time collaboration with email invites
 - Light/Dark mode support
 
 ### 📱 Screens
 1. **Home Page**
    - Grid of recipes with images
    - Recipe cards showing title, author, date, and summary
-   - Search and filter functionality
 
 2. **Recipe Detail Page**
    - Comprehensive recipe information
    - Dynamic ingredient scaling
    - Step-by-step instructions with timers
-   - Collaboration features
+   - Collaboration features for authors and collaborators
 
 3. **User Dashboard**
    - Created recipes
-   - Collaboration requests
-   - Notifications
+   - Collaborated recipes
+   - Notifications of requests
 
 4. **Recipe Editor**
    - Create/Edit recipes
@@ -104,25 +103,3 @@ RecipeHub/
 │
 └── README.md
 ```
-
-## Color Scheme
-The application uses a custom color scheme defined in the Tailwind configuration:
-- Light Mode:
-  - Primary: #FF6B6B
-  - Secondary: #4ECDC4
-  - Background: #F7F7F7
-  - Text: #2D3436
-  - Accent: #FFD166
-
-- Dark Mode:
-  - Primary: #FF6B6B
-  - Secondary: #4ECDC4
-  - Background: #1A1A1A
-  - Text: #F7F7F7
-  - Accent: #FFD166
-
-## Contributing
-Feel free to submit issues and enhancement requests.
-
-## License
-This project is licensed under the MIT License.
