@@ -9,7 +9,10 @@ interface Notification {
     email: string;
   };
   receiverId: string;
-  recipeId:string;
+  recipeId: {
+    _id: string;
+    title: string;
+  };
   status: 'pending' | 'accepted' | 'rejected';
   createdAt: string;
   updatedAt: string;

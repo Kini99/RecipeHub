@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
-import { RootState } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { createRecipe, fetchRecipe, updateRecipe } from '../store/slices/recipeSlice';
 import { Recipe } from '../types';
 
@@ -11,7 +11,7 @@ const RecipeForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user } = useSelector((state: RootState) => state.auth);
   const { recipes, loading } = useSelector((state: RootState) => state.recipe);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<Recipe>({
@@ -26,12 +26,11 @@ const RecipeForm: React.FC = () => {
     tags: [] as string[],
     servings: 4,
     isPublic: true,
-    author:  { _id: user?._id, name: user?.name, email: user?.email, createdAt: user?.createdAt },
+    author: { _id: user?._id, name: user?.name, email: user?.email, createdAt: user?.createdAt },
   } as Recipe);
 
   const [newTag, setNewTag] = useState<string[]>([]);
   const [lastSync, setLastSync] = useState<Date | null>(null);
-  const [syncInterval, setSyncInterval] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (id) {
@@ -53,8 +52,7 @@ const RecipeForm: React.FC = () => {
       const interval = setInterval(() => {
         dispatch(fetchRecipe(id));
         setLastSync(new Date());
-      }, 30000); // Poll every 30 seconds
-      setSyncInterval(interval);
+      }, 30000);
 
       return () => {
         if (interval) clearInterval(interval);

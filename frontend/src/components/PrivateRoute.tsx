@@ -1,10 +1,14 @@
 // components/PrivateRoute.tsx
-import React from 'react';
+import { ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { RootState } from '../store';
 
-const PrivateRoute  = ({ children }) => {
+interface PrivateRouteProps {
+  children: ReactNode;
+}
+
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const location = useLocation();
 

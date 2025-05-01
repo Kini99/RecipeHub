@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../services/api';
-import { RootState, AppDispatch } from '../store';
+import { AppDispatch, RootState } from '../store';
 import { inviteCollaborators } from '../store/slices/recipeSlice';
-import Button from './ui/Button';
 import { Recipe } from '../types';
+import Button from './ui/Button';
 
 interface User {
   _id: string;
@@ -21,7 +21,7 @@ const CollaboratorInviteModal: React.FC<CollaboratorInviteModalProps> = ({
   recipe,
   onClose,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { user: currentUser, token } = useSelector((state: RootState) => state.auth);
   const [users, setUsers] = useState<User[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
@@ -44,7 +44,7 @@ const CollaboratorInviteModal: React.FC<CollaboratorInviteModalProps> = ({
 
         if (response.data) {
           // Filter out current user from the list
-          setUsers(response.data.filter((user: User) => user._id !== currentUser?.id  && !recipe?.collaborators?.includes(user._id)));
+          setUsers(response.data.filter((user: User) => user._id !== currentUser?.id && !recipe?.collaborators?.includes(user._id)));
         }
       } catch (err) {
         if (err instanceof Error) {
@@ -79,9 +79,9 @@ const CollaboratorInviteModal: React.FC<CollaboratorInviteModalProps> = ({
 
     setLoading(true);
     try {
-    const response=  await dispatch(inviteCollaborators({ recipeId: recipe?._id, userIds: selectedUsers }));
+      const response = await dispatch(inviteCollaborators({ recipeId: recipe?._id, userIds: selectedUsers }));
       onClose();
-      if (response.ok) {
+      if (response) {
         alert('Invitations sent successfully');
       } else {
         setError('Failed to send invitations. Please try again.');
@@ -106,11 +106,10 @@ const CollaboratorInviteModal: React.FC<CollaboratorInviteModalProps> = ({
             {users.map((user) => (
               <div
                 key={user._id}
-                className={`flex items-center justify-between p-3 rounded mb-2 cursor-pointer ${
-                  selectedUsers.includes(user._id)
-                    ? 'bg-primary-light bg-opacity-20'
-                    : 'hover:bg-gray-100 dark:hover:bg-gray-700'
-                }`}
+                className={`flex items-center justify-between p-3 rounded mb-2 cursor-pointer ${selectedUsers.includes(user._id)
+                  ? 'bg-primary-light bg-opacity-20'
+                  : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }`}
                 onClick={() => handleUserSelect(user._id)}
               >
                 <div>

@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootState } from "../store";
-import Card from "../components/ui/Card";
-import Button from "../components/ui/Button";
 import RecipeCard from "../components/RecipeCard";
-import { fetchRecipes } from "../store/slices/recipeSlice";
+import Button from "../components/ui/Button";
+import Card from "../components/ui/Card";
+import { AppDispatch, RootState } from "../store";
 import { getNotifications } from "../store/slices/notificationSlice";
+import { fetchRecipes } from "../store/slices/recipeSlice";
 
 const Home: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const { recipes, loading, error } = useSelector(
     (state: RootState) => state.recipe
   );
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchRecipes());

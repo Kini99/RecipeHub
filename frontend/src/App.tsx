@@ -8,7 +8,6 @@ import { ThemeProvider } from './context/ThemeContext';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import Notifications from './screens/Notifications';
-import Profile from './screens/Profile';
 import RecipeDetail from './screens/RecipeDetail';
 import RecipeForm from './screens/RecipeForm';
 import Register from './screens/Register';
@@ -29,7 +28,6 @@ const AppContent: React.FC = () => {
           <Route path="/register" element={isAuthenticated ? <Navigate to="/" /> : <Register />} />
 
           {/* Protected Routes */}
-          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/notifications" element={<PrivateRoute><Notifications /></PrivateRoute>} />
           <Route path="/recipes/:id/edit" element={<PrivateRoute><RecipeForm /></PrivateRoute>} />
           <Route path="/recipes/new" element={<PrivateRoute><RecipeForm /></PrivateRoute>} />

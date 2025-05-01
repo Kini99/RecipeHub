@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { motion } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
-import { logout } from '../store/slices/authSlice';
-import { RootState, AppDispatch } from '../store';
 import {
-  SunIcon,
-  MoonIcon,
-  UserIcon,
-  ChevronDownIcon,
   BellIcon,
-  BookOpenIcon,
+  ChevronDownIcon,
+  MoonIcon,
+  SunIcon,
+  UserIcon
 } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
+import { AppDispatch, RootState } from '../store';
+import { logout } from '../store/slices/authSlice';
 
 const Navigation: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -21,13 +20,13 @@ const Navigation: React.FC = () => {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector((state: RootState) => state.auth);
   const { notifications } = useSelector((state: RootState) => state.notification);
-  
+
   const pendingNotifications = notifications?.filter(
     notification => notification.status === 'pending'
   ).length || 0;
 
   const handleLogout = () => {
-    setIsUserMenuOpen(false); 
+    setIsUserMenuOpen(false);
     dispatch(logout());
     navigate('/');
   };
@@ -84,13 +83,6 @@ const Navigation: React.FC = () => {
                       animate={{ opacity: 1, y: 0 }}
                       className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1"
                     >
-                      {/* <Link
-                        to="/profile"
-                        onClick={() => setIsUserMenuOpen(false)}
-                        className="block px-4 py-2 text-sm text-text-light dark:text-text-dark hover:bg-gray-100 dark:hover:bg-gray-700"
-                      >
-                        Profile
-                      </Link> */}
                       <button
                         onClick={handleLogout}
                         className="block w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"

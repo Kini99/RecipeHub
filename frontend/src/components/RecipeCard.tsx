@@ -1,10 +1,9 @@
+import { format } from 'date-fns';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { Recipe } from '../types';
-import Card from './ui/Card';
 import Button from './ui/Button';
-import { format } from 'date-fns';
+import Card from './ui/Card';
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -48,7 +47,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, showEditButton = false 
           <span> {format(new Date(recipe.createdAt), 'MMMM d, yyyy')}</span>
         </div>
         <div className="mt-4 flex items-center justify-start gap-4 text-sm">
-          {recipe.tags.map(tag=>{
+          {recipe.tags.map(tag => {
             return <span key={tag} className="px-3 py-1 rounded-full text-sm bg-primary-light dark:bg-primary-dark text-white">{tag}</span>
           })}
         </div>

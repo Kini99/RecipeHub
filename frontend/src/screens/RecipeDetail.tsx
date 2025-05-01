@@ -1,14 +1,14 @@
+import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import CollaboratorInviteModal from '../components/CollaboratorInviteModal';
 import Timer from '../components/Timer';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { RootState } from '../store';
 import { Recipe } from '../types';
-import { format } from 'date-fns';
 import { formatTime } from '../utils/time';
-import CollaboratorInviteModal from '../components/CollaboratorInviteModal';
 const messages = [
   "Great job! You're doing amazing!",
   "Keep going, you're a cooking superstar!",
@@ -36,7 +36,6 @@ const RecipeDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user } = useSelector((state: RootState) => state.auth);
   const { recipes, loading, error } = useSelector((state: RootState) => state.recipe);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentRecipe = recipes.find(recipe => recipe._id === id);
   const [servings, setServings] = useState<number>();
@@ -73,7 +72,7 @@ const RecipeDetail: React.FC = () => {
   };
 
   const handleStartTimer = (stepIndex: number, timer: number) => {
-    if (!timer || timer <= 0) return; 
+    if (!timer || timer <= 0) return;
     setActiveTimer(stepIndex);
     setTimeout(() => {
       setActiveTimer(null);
